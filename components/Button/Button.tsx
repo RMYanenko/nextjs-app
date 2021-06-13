@@ -3,13 +3,13 @@ import s from "./Button.module.scss";
 import ArrowIcon from "./arrow.svg";
 import cn from "classnames";
 
-export default function Button({
+export const Button = ({
   appearance,
   arrow = "none",
   children,
   className,
   ...props
-}: ButtonProps): JSX.Element {
+}: ButtonProps): JSX.Element => {
   return (
     <button
       className={cn(s.btn, className, {
@@ -31,4 +31,4 @@ export default function Button({
       )}
     </button>
   );
-}
+};
