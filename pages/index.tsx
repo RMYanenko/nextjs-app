@@ -8,6 +8,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Htag tag="h1">Text</Htag>
+      <Rating rating={rating}  isEditable setRating={setRating} />
       <Button
         appearance="primary"
         arrow="right"
@@ -32,7 +33,7 @@ export default function Home(): JSX.Element {
       <Tag size='m'>
         !!!
       </Tag>
-      <Rating rating={4}  isEditable setRating={setRating} />
+    
     </>
   );
 }

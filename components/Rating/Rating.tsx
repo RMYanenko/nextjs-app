@@ -32,7 +32,7 @@ export const Rating = ({
         >
           <StarIcon
             tabIndex={isEditable ? 0 : -1}
-            onKeyDown={(e: KeyboardEvent<SVGSVGElement>) =>
+            onKeyDown={(e: KeyboardEvent<SVGElement>) =>
               isEditable && handleSpace(i + 1, e)
             }
           />
@@ -48,6 +48,7 @@ export const Rating = ({
     }
     constructRating(i);
   };
+  
   const onClick = (i: number) => {
     if (!isEditable || !setRating) {
       return;
@@ -55,7 +56,7 @@ export const Rating = ({
     setRating(i);
   };
 
-  const handleSpace = (i: number, e: KeyboardEvent<SVGAElement>) => {
+  const handleSpace = (i: number, e: KeyboardEvent<SVGElement>) => {
     if (e.code != "Space" || !setRating) {
       return;
     }
