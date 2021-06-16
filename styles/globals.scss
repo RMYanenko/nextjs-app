@@ -5,6 +5,7 @@ $primary-dark:  darken($primary, 10%);
 $red: #FC836D;
 $green: #1DC37E;
 $green-lite: #C8F8E4;
+$gray-lite: #EBEBEB;
 $font-family: 'Noto Sans KR', sans-serif;
 
 html,
@@ -27,7 +28,6 @@ a {
 }
 
 
-
 :root {
 	--black: #{$black};
 	--white: #{$white};
@@ -36,5 +36,6 @@ a {
 	--red: #{$red};
 	--green: #{$green};
 	--green-lite: #{$green-lite};
+	--gray-lite: #{$gray-lite};
 	--font-family: 'Noto Sans KR', sans-serif;
 }
