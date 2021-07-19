@@ -1,4 +1,5 @@
 import {
+  GetStaticPaths,
   GetStaticPathsContext,
   GetStaticProps,
   GetStaticPropsContext,
@@ -11,21 +12,38 @@ import { TopPageModel } from "../../interfaces/page.interfaces";
 import { ParsedUrlQuery } from "querystring";
 import { ProductModel } from './../../interfaces/product.interface';
 
+const firstCategory = 0;
+
 function Course({ menu, page, products }: CourseProps): JSX.Element {
-  return <></>;
+  return <>
+  {products.length}
+  </>;
 }
 
 export default withLayout(Course);
 
+export const getStaticPaths: GetStaticPaths = async() => {
+  const { data: menu } = await axios.post<MenuItem[]>(
+    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+    {
+      firstCategory
+    }
+  );
+  return {
+    paths: menu.flatMap(m => m.pages.map(p => '/courses/' + p.alias)),
+    fallback: true
+  }
+}
+
 export const getStaticProps: GetStaticProps<CourseProps> = async ({
-  params,
+  params
 }: GetStaticPropsContext<ParsedUrlQuery>) => {
   if (!params) {
     return {
-      notFound: true,
+      notFound: true
     };
   }
-  const firstCategory = 0;
+
   const { data: menu } = await axios.post<MenuItem[]>(
     process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
     {
@@ -33,7 +51,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
     }
   );
   const { data: page } = await axios.get<TopPageModel>(
-    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/toAlias/" + params.alias
+    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/byAlias/" + params.alias
   );
 
   const { data: products } = await axios.post<ProductModel[]>(
@@ -56,5 +74,5 @@ interface CourseProps extends Record<string, unknown> {
   menu: MenuItem[];
   firstCategory: number;
   page: TopPageModel;
-  product: ProductModel[];
+  products: ProductModel[];
 }
